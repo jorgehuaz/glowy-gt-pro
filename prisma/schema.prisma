@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Product {
+  id           String   @id @default(uuid())
+  name         String
+  brand        String
+  cost         Float
+  sellingPrice Float
+  stock        Int      @default(0)
+  image        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  OrderItems   OrderItem[]
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  name      String
+  nit       String?
+  phone     String?
+  type      String   @default("Nuevo") // VIP, Frecuente, Nuevo
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  status     String      @default("Pendiente") // Completado, Cancelado, Pendiente
+  statusNote String?     // Motivo pendiente, motivo cancelación o método de pago
+  total      Float
+  date       DateTime    @default(now())
+  clientId   String
+  client     Client      @relation(fields: [clientId], references: [id])
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Drop {
+  id        String   @id @default(uuid())
+  title     String   // Ej: Rare Beauty Blush, Pedido para María...
+  stage     String   // por_pedir | en_transito | enviado_cliente
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

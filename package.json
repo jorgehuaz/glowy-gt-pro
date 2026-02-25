@@ -1,0 +1,57 @@
+{
+  "name": "glowy-gt-pro",
+  "version": "1.0.0",
+  "description": "GlowyGt Desktop App",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5180 && set NODE_ENV=development && electron .\"",
+    "dev:chrome": "concurrently \"node server.js\" \"vite\"",
+    "start:api": "node server.js",
+    "build": "vite build && electron-builder",
+    "preview": "vite preview",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.4.1",
+    "better-sqlite3": "^12.6.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "framer-motion": "^11.3.21",
+    "lucide-react": "^0.424.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@prisma/client": "^7.4.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.24",
+    "concurrently": "^8.2.2",
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9",
+    "postcss": "^8.5.6",
+    "prisma": "^7.4.1",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0",
+    "wait-on": "^7.2.0"
+  },
+  "prisma": {
+    "seed": "node seed.js"
+  },
+  "build": {
+    "appId": "com.glowygt.app",
+    "win": {
+      "signAndEditExecutable": false,
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
