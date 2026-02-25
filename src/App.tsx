@@ -586,7 +586,7 @@ function StatCard({ label, value, trend, icon, onClick }: { label: string, value
         <Wrapper
             type={onClick ? 'button' : undefined}
             onClick={onClick}
-            className={`bg-white p-6 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow text-left w-full ${onClick ? 'cursor-pointer hover:border-brand-pink/20 active:scale-[0.99]' : ''}`}
+            className={`bg-white p-6 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow text-left w-full font-card ${onClick ? 'cursor-pointer hover:border-brand-pink/20 active:scale-[0.99]' : ''}`}
         >
             <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-brand-cream rounded-2xl">
@@ -595,7 +595,7 @@ function StatCard({ label, value, trend, icon, onClick }: { label: string, value
                 <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-lg">{trend}</span>
             </div>
             <p className="text-stone-500 text-sm mb-1">{label}</p>
-            <p className="text-2xl font-serif font-bold text-brand-dark">{value}</p>
+            <p className="text-2xl font-bold text-brand-dark">{value}</p>
         </Wrapper>
     );
 }
